@@ -1,0 +1,41 @@
+name: parkinsons_golf
+description: >
+  County-level association between Parkinson's disease mortality and
+  pesticide exposure intensity (agricultural + ornamental).
+
+outcome: parkinsons_mortality_rate
+outcome_source: cdc_wonder
+outcome_icd10: G20
+
+exposures:
+  - name: paraquat_kg
+    source: usgs_pesticide_use
+    compound: PARAQUAT DICHLORIDE
+  - name: rotenone_kg
+    source: usgs_pesticide_use
+    compound: ROTENONE
+  - name: chlorpyrifos_kg
+    source: usgs_pesticide_use
+    compound: CHLORPYRIFOS
+  - name: golf_course_density
+    source: osm_features
+    osm_tag: "leisure=golf_course"
+
+confounders:
+  - name: median_age
+    source: census_acs
+    variable_code: B01002_001E
+  - name: median_income
+    source: census_acs
+    variable_code: B19013_001E
+  - name: pct_rural
+    source: census_acs
+  - name: healthcare_access
+    source: county_health_rankings
+    measure: primary_care_physicians_ratio
+
+analysis:
+  years: [2015, 2016, 2017, 2018, 2019]
+  alpha: 0.05
+  spatial_analysis: true
+  bonferroni_correction: true
