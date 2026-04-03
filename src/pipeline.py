@@ -103,7 +103,8 @@ class Pipeline:
         try:
             from src.data.registry import DataSourceRegistry
             reg = DataSourceRegistry()
-            exposures = [v for v in reg.list_variables() if v != outcome][:top_n]
+            all_vars = [col for cols in reg.list_variables().values() for col in cols]
+            exposures = [v for v in all_vars if v != outcome][:top_n]
             for exp in exposures:
                 r = self.run_hypothesis(exp, outcome, confounders or [], output_mode, progress_cb)
                 results.append(r)

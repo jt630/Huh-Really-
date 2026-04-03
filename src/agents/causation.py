@@ -150,7 +150,7 @@ def assess_bradford_hill(
     """)
 
     message = client.messages.create(
-        model="claude-opus-4-5",
+        model="claude-opus-4-6",
         max_tokens=2048,
         system=_BH_SYSTEM,
         messages=[{"role": "user", "content": user_prompt}],
@@ -221,7 +221,7 @@ def _identify_domain_confounders(
         Return only a JSON array of strings, e.g. ["age", "sex", ...].
     """)
     message = client.messages.create(
-        model="claude-opus-4-5",
+        model="claude-opus-4-6",
         max_tokens=512,
         system=system,
         messages=[{"role": "user", "content": user}],
@@ -391,7 +391,7 @@ def evaluate_alternatives(
     """)
 
     message = client.messages.create(
-        model="claude-opus-4-5",
+        model="claude-opus-4-6",
         max_tokens=2048,
         system=_ALT_SYSTEM,
         messages=[{"role": "user", "content": user_prompt}],
@@ -477,7 +477,7 @@ def _synthesise(
     """)
 
     message = client.messages.create(
-        model="claude-opus-4-5",
+        model="claude-opus-4-6",
         max_tokens=1024,
         system=_SYNTH_SYSTEM,
         messages=[{"role": "user", "content": user_prompt}],
@@ -503,17 +503,9 @@ ECOLOGICAL_FALLACY_WARNING = (
 class CausationAgent:
     """Orchestrates Bradford-Hill assessment, confounder analysis,
     alternative explanation evaluation, and overall causal synthesis.
-
-    Parameters
-    ----------
-    client:
-        An initialised ``anthropic.Anthropic`` client.
     """
 
-    def __init__(self, client: anthropic.Anthropic) -> None:
-        self.client = client
-
-    def run(self, request: CausationRequest) -> CausationResult:
+    def run(self, request: CausationRequest, client: anthropic.Anthropic) -> CausationResult:
         """Run the full causation-assessment pipeline.
 
         Parameters
@@ -528,17 +520,17 @@ class CausationAgent:
             always non-empty.
         """
         # Step 1 – Bradford-Hill criteria
-        bh_criteria = assess_bradford_hill(request, self.client)
+        bh_criteria = assess_bradford_hill(request, client)
 
         # Step 2 – Confounder analysis (statistical + domain-specific)
-        confounders = analyze_confounders(request, self.client)
+        confounders = analyze_confounders(request, client)
 
         # Step 3 – Alternative explanations
-        alternatives = evaluate_alternatives(request, self.client)
+        alternatives = evaluate_alternatives(request, client)
 
         # Step 4 – Overall synthesis
         synthesis = _synthesise(
-            request, bh_criteria, confounders, alternatives, self.client
+            request, bh_criteria, confounders, alternatives, client
         )
 
         return CausationResult(
