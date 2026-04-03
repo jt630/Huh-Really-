@@ -32,19 +32,31 @@ class Pipeline:
             if progress_cb: progress_cb("correlation", "running")
             from src.agents.correlation import CorrelationAgent, CorrelationRequest
             import pandas as pd
-            # Load data — fixture takes priority (reliable for demos/offline)
+            # Load data — fixture > DuckDB > live registry
             if fixture_path and Path(fixture_path).exists():
                 df = pd.read_csv(fixture_path).set_index("county_fips")
-                logging.info("Pipeline: loaded fixture data from %s (%d rows)", fixture_path, len(df))
+                logging.info("Pipeline: loaded fixture from %s (%d rows)", fixture_path, len(df))
             else:
+                df = pd.DataFrame()
                 try:
-                    from src.data.registry import DataSourceRegistry
-                    reg = DataSourceRegistry()
-                    outcome_df = reg.load(outcome.split("_")[0], variable=outcome)
-                    exposure_df = reg.load(exposure.split("_")[0], variable=exposure)
-                    df = outcome_df.join(exposure_df, how="inner")
+                    from src.db import load_source, available as db_available
+                    if db_available():
+                        outcome_df = load_source(outcome.split("_")[0])
+                        exposure_df = load_source(exposure.split("_")[0])
+                        if outcome_df is not None and exposure_df is not None:
+                            df = outcome_df.join(exposure_df, how="inner")
+                            logging.info("Pipeline: loaded from DuckDB (%d rows)", len(df))
                 except Exception:
-                    df = pd.DataFrame()  # empty fallback
+                    pass
+                if df.empty:
+                    try:
+                        from src.data.registry import DataSourceRegistry
+                        reg = DataSourceRegistry()
+                        outcome_df = reg.load(outcome.split("_")[0], variable=outcome)
+                        exposure_df = reg.load(exposure.split("_")[0], variable=exposure)
+                        df = outcome_df.join(exposure_df, how="inner")
+                    except Exception:
+                        pass
 
             agent = CorrelationAgent()
             if not df.empty:
