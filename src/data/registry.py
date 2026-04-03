@@ -86,6 +86,31 @@ _SOURCE_CATALOG: dict[str, dict[str, Any]] = {
         "description": "Semantic Scholar academic paper search",
         "output_columns": ["paper_id", "title", "abstract", "year", "citation_count"], "index": None,
     },
+    "usgs_pesticide_use": {
+        "module": "src.data.usgs_pesticide_use", "function": "fetch_pesticide_use", "required_keys": [],
+        "description": "USGS county-level pesticide use estimates (kg applied)",
+        "output_columns": ["compound", "kg_applied", "year"], "index": "county_fips",
+    },
+    "census_acs": {
+        "module": "src.data.census_acs", "function": "fetch_acs", "required_keys": [],
+        "description": "Census ACS 5-year estimates — median age, income, poverty by county",
+        "output_columns": ["variable_name", "variable_code", "value", "year"], "index": "county_fips",
+    },
+    "osm_features": {
+        "module": "src.data.osm_features", "function": "fetch_osm_features", "required_keys": [],
+        "description": "OpenStreetMap feature counts by county (golf courses, industrial sites, etc.)",
+        "output_columns": ["feature_type", "count", "density_per_sq_km"], "index": "county_fips",
+    },
+    "county_health_rankings": {
+        "module": "src.data.county_health_rankings", "function": "fetch_health_rankings", "required_keys": [],
+        "description": "County Health Rankings — healthcare access, smoking, obesity by county",
+        "output_columns": ["measure", "value", "year"], "index": "county_fips",
+    },
+    "cms_chronic": {
+        "module": "src.data.cms_chronic", "function": "fetch_cms_chronic", "required_keys": [],
+        "description": "CMS Medicare chronic condition prevalence by county",
+        "output_columns": ["condition", "prevalence_pct", "beneficiary_count", "year"], "index": "county_fips",
+    },
 }
 
 
