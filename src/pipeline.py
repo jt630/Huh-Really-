@@ -20,7 +20,7 @@ class Pipeline:
         self.settings = get_settings()
 
     def run_hypothesis(self, exposure, outcome, confounders, output_mode="brief",
-                       progress_cb=None) -> PipelineResult:
+                       progress_cb=None, fixture_path: str | None = None) -> PipelineResult:
         run_id = str(uuid.uuid4())[:8]
         result = PipelineResult(run_id=run_id, exposure=exposure, outcome=outcome,
                                 timestamp=datetime.utcnow().isoformat())
@@ -32,15 +32,19 @@ class Pipeline:
             if progress_cb: progress_cb("correlation", "running")
             from src.agents.correlation import CorrelationAgent, CorrelationRequest
             import pandas as pd
-            # Load data from registry
-            try:
-                from src.data.registry import DataSourceRegistry
-                reg = DataSourceRegistry()
-                outcome_df = reg.load(outcome.split("_")[0], variable=outcome)
-                exposure_df = reg.load(exposure.split("_")[0], variable=exposure)
-                df = outcome_df.join(exposure_df, how="inner")
-            except Exception:
-                df = pd.DataFrame()  # empty fallback for testing
+            # Load data — fixture takes priority (reliable for demos/offline)
+            if fixture_path and Path(fixture_path).exists():
+                df = pd.read_csv(fixture_path).set_index("county_fips")
+                logging.info("Pipeline: loaded fixture data from %s (%d rows)", fixture_path, len(df))
+            else:
+                try:
+                    from src.data.registry import DataSourceRegistry
+                    reg = DataSourceRegistry()
+                    outcome_df = reg.load(outcome.split("_")[0], variable=outcome)
+                    exposure_df = reg.load(exposure.split("_")[0], variable=exposure)
+                    df = outcome_df.join(exposure_df, how="inner")
+                except Exception:
+                    df = pd.DataFrame()  # empty fallback
 
             agent = CorrelationAgent()
             if not df.empty:
@@ -122,16 +126,19 @@ def main():
     parser.add_argument("--mode", default="brief")
     args = parser.parse_args()
 
+    fixture_path = None
     if args.case:
         import yaml
         case = yaml.safe_load(Path(args.case).read_text())
         exposure = case["exposures"][0]["name"]
         outcome = case["outcome"]
         confounders = [c["name"] for c in case.get("confounders", [])]
+        fixture_path = case.get("fixture_data")
     else:
         exposure, outcome, confounders = args.exposure, args.outcome, args.confounders
 
     pipeline = Pipeline()
     result = pipeline.run_hypothesis(exposure, outcome, confounders, args.mode,
-                                     progress_cb=lambda s, st: print(f"[{s}] {st}"))
+                                     progress_cb=lambda s, st: print(f"[{s}] {st}"),
+                                     fixture_path=fixture_path)
     print(json.dumps(result.model_dump(mode="json"), indent=2))
