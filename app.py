@@ -1,7 +1,15 @@
+import os
 import streamlit as st
 from pathlib import Path
 
 st.set_page_config(page_title="Unlikely Correlations", page_icon="🔬", layout="wide")
+
+if not os.environ.get("ANTHROPIC_API_KEY"):
+    from dotenv import load_dotenv
+    load_dotenv()
+if not os.environ.get("ANTHROPIC_API_KEY"):
+    st.error("**ANTHROPIC_API_KEY not set.** Create a `.env` file with `ANTHROPIC_API_KEY=your_key` then restart.")
+    st.stop()
 
 # Sidebar
 with st.sidebar:
@@ -36,7 +44,9 @@ if demo_btn:
     if case_path.exists():
         case = yaml.safe_load(case_path.read_text())
         st.session_state["demo_case"] = case
-        st.info("Demo case loaded: Parkinson's disease / pesticide exposure")
+        st.session_state["demo_fixture"] = case.get("fixture_data")
+        st.session_state["run"] = True
+        st.rerun()
 
 if run_btn or st.session_state.get("run"):
     from src.pipeline import Pipeline
@@ -50,6 +60,8 @@ if run_btn or st.session_state.get("run"):
         pct = int((idx + (1 if status == "done" else 0.5)) / len(stages) * 100)
         progress.progress(pct, text=f"{stage}: {status}")
 
+    fixture_path = st.session_state.pop("demo_fixture", None)
+
     with st.spinner("Running pipeline..."):
         pipeline = Pipeline()
         try:
@@ -57,7 +69,7 @@ if run_btn or st.session_state.get("run"):
                 result = pipeline.run_hypothesis(
                     exposure=exposure, outcome=outcome,
                     confounders=confounders, output_mode=output_mode,
-                    progress_cb=update_progress)
+                    progress_cb=update_progress, fixture_path=fixture_path)
                 results = [result]
             else:
                 results = pipeline.run_discovery(

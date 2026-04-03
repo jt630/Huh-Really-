@@ -39,3 +39,6 @@ analysis:
   alpha: 0.05
   spatial_analysis: true
   bonferroni_correction: true
+
+# Pre-built fixture for demo/offline use (synthetic data, realistic distributions)
+fixture_data: cases/parkinsons_golf_fixture.csv

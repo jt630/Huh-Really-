@@ -20,7 +20,7 @@ class Pipeline:
         self.settings = get_settings()
 
     def run_hypothesis(self, exposure, outcome, confounders, output_mode="brief",
-                       progress_cb=None) -> PipelineResult:
+                       progress_cb=None, fixture_path: str | None = None) -> PipelineResult:
         run_id = str(uuid.uuid4())[:8]
         result = PipelineResult(run_id=run_id, exposure=exposure, outcome=outcome,
                                 timestamp=datetime.utcnow().isoformat())
@@ -32,15 +32,31 @@ class Pipeline:
             if progress_cb: progress_cb("correlation", "running")
             from src.agents.correlation import CorrelationAgent, CorrelationRequest
             import pandas as pd
-            # Load data from registry
-            try:
-                from src.data.registry import DataSourceRegistry
-                reg = DataSourceRegistry()
-                outcome_df = reg.load(outcome.split("_")[0], variable=outcome)
-                exposure_df = reg.load(exposure.split("_")[0], variable=exposure)
-                df = outcome_df.join(exposure_df, how="inner")
-            except Exception:
-                df = pd.DataFrame()  # empty fallback for testing
+            # Load data — fixture > DuckDB > live registry
+            if fixture_path and Path(fixture_path).exists():
+                df = pd.read_csv(fixture_path).set_index("county_fips")
+                logging.info("Pipeline: loaded fixture from %s (%d rows)", fixture_path, len(df))
+            else:
+                df = pd.DataFrame()
+                try:
+                    from src.db import load_source, available as db_available
+                    if db_available():
+                        outcome_df = load_source(outcome.split("_")[0])
+                        exposure_df = load_source(exposure.split("_")[0])
+                        if outcome_df is not None and exposure_df is not None:
+                            df = outcome_df.join(exposure_df, how="inner")
+                            logging.info("Pipeline: loaded from DuckDB (%d rows)", len(df))
+                except Exception:
+                    pass
+                if df.empty:
+                    try:
+                        from src.data.registry import DataSourceRegistry
+                        reg = DataSourceRegistry()
+                        outcome_df = reg.load(outcome.split("_")[0], variable=outcome)
+                        exposure_df = reg.load(exposure.split("_")[0], variable=exposure)
+                        df = outcome_df.join(exposure_df, how="inner")
+                    except Exception:
+                        pass
 
             agent = CorrelationAgent()
             if not df.empty:
@@ -103,7 +119,8 @@ class Pipeline:
         try:
             from src.data.registry import DataSourceRegistry
             reg = DataSourceRegistry()
-            exposures = [v for v in reg.list_variables() if v != outcome][:top_n]
+            all_vars = [col for cols in reg.list_variables().values() for col in cols]
+            exposures = [v for v in all_vars if v != outcome][:top_n]
             for exp in exposures:
                 r = self.run_hypothesis(exp, outcome, confounders or [], output_mode, progress_cb)
                 results.append(r)
@@ -121,16 +138,19 @@ def main():
     parser.add_argument("--mode", default="brief")
     args = parser.parse_args()
 
+    fixture_path = None
     if args.case:
         import yaml
         case = yaml.safe_load(Path(args.case).read_text())
         exposure = case["exposures"][0]["name"]
         outcome = case["outcome"]
         confounders = [c["name"] for c in case.get("confounders", [])]
+        fixture_path = case.get("fixture_data")
     else:
         exposure, outcome, confounders = args.exposure, args.outcome, args.confounders
 
     pipeline = Pipeline()
     result = pipeline.run_hypothesis(exposure, outcome, confounders, args.mode,
-                                     progress_cb=lambda s, st: print(f"[{s}] {st}"))
+                                     progress_cb=lambda s, st: print(f"[{s}] {st}"),
+                                     fixture_path=fixture_path)
     print(json.dumps(result.model_dump(mode="json"), indent=2))
