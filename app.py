@@ -48,7 +48,8 @@ if demo_btn:
         st.session_state["run"] = True
         st.rerun()
 
-if run_btn or st.session_state.get("run"):
+should_run = run_btn or st.session_state.pop("run", False)
+if should_run:
     from src.pipeline import Pipeline
 
     progress = st.progress(0, text="Starting pipeline...")
@@ -154,6 +155,16 @@ if run_btn or st.session_state.get("run"):
             st.json(result.model_dump(mode="json") if hasattr(result, 'model_dump') else result.__dict__)
 
 else:
-    st.info("Configure parameters in the sidebar and click **Run** to start the pipeline.")
-    st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/World_map_blank_without_borders.svg/1200px-World_map_blank_without_borders.svg.png",
-             caption="County-level analysis across the US", use_column_width=True)
+    st.info("Configure parameters in the sidebar and click **Run** to start the pipeline, or click **Demo** to run the bundled Parkinson's / pesticide case against the offline fixture.")
+    st.markdown(
+        """
+        **Pipeline stages**
+
+        1. **Correlation** — Pearson/Spearman + partial correlation, optional PySAL LISA spatial clustering.
+        2. **Literature** — PubMed search + Claude synthesis of supporting / contradicting evidence.
+        3. **Causation** — Bradford Hill criteria, confounder review, alternative explanations.
+        4. **Study design** — Investigation brief or full research proposal (downloadable Markdown).
+
+        County-level analysis across the US (2015–2019 for the demo case).
+        """
+    )
