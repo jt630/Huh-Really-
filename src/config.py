@@ -3,14 +3,16 @@ Configuration - loads from .env via pydantic-settings.
 """
 
 from pathlib import Path
-from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 
-    anthropic_api_key: str = Field(...)
+    # Optional: demo mode runs entirely from pre-computed fixtures and does not
+    # require a key. Live mode (no fixture_outputs) will raise at the first
+    # agent call if this is unset.
+    anthropic_api_key: str | None = None
     ncbi_api_key: str | None = None
     census_api_key: str | None = None
     epa_aqs_email: str | None = None

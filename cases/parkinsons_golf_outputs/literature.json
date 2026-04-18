@@ -1,0 +1,180 @@
+{
+  "request": {
+    "hypothesis": "Is there a causal relationship between paraquat_kg and parkinsons_mortality_rate?",
+    "max_results": 50,
+    "depth": 1
+  },
+  "papers": [
+    {
+      "pmid": "21269927",
+      "title": "Rotenone, paraquat, and Parkinson's disease.",
+      "abstract": "BACKGROUND: Mitochondrial dysfunction and oxidative stress are pathogenic features of Parkinson's disease (PD). Rotenone and paraquat, commonly used pesticides, reproduce features of PD in animal models. OBJECTIVE: To examine the association between PD and self-reported use of rotenone and paraquat in a case-control study. METHODS: The Farming and Movement Evaluation (FAME) study is a case-control study nested in the Agricultural Health Study. Cases (n=110) were incident PD patients; controls (n=358) were frequency-matched on age, sex, and state. RESULTS: PD was associated with use of rotenone (OR 2.5, 95% CI 1.3-4.7) and paraquat (OR 2.5, 95% CI 1.4-4.7).",
+      "authors": ["Tanner Caroline M", "Kamel Freya", "Ross G Webster", "Hoppin Jane A", "Goldman Samuel M"],
+      "journal": "Environmental Health Perspectives",
+      "pub_date": "2011 Jun",
+      "year": 2011,
+      "mesh_terms": ["Parkinson Disease", "Paraquat", "Rotenone", "Pesticides", "Case-Control Studies", "Agricultural Workers' Diseases"],
+      "doi": "10.1289/ehp.1002839"
+    },
+    {
+      "pmid": "19270050",
+      "title": "Parkinson's disease and residential exposure to maneb and paraquat from agricultural applications in the central valley of California.",
+      "abstract": "The authors used California Pesticide Use Reports and land-use maps to estimate ambient residential exposure to paraquat and maneb from 1974-1999 among 368 PD cases and 341 controls from the Central Valley. PD risk increased with combined exposure to maneb and paraquat (OR 1.75, 95% CI 1.13-2.73 for exposure to both compounds). Exposure during ages 19-40 years conferred the highest risk.",
+      "authors": ["Costello Sadie", "Cockburn Myles", "Bronstein Jeff", "Zhang Xinbo", "Ritz Beate"],
+      "journal": "American Journal of Epidemiology",
+      "pub_date": "2009 Apr",
+      "year": 2009,
+      "mesh_terms": ["Parkinson Disease", "Paraquat", "Maneb", "Environmental Exposure", "California", "Agriculture"],
+      "doi": "10.1093/aje/kwp006"
+    },
+    {
+      "pmid": "17116648",
+      "title": "Pesticide exposure and self-reported Parkinson's disease in the Agricultural Health Study.",
+      "abstract": "Licensed pesticide applicators (n=79,557) and spouses were followed prospectively in the Agricultural Health Study. Ever-use of any pesticide was associated with incident PD (OR 1.7, 95% CI 1.2-2.3). Herbicide use showed an elevated but non-significant association. Cumulative days of pesticide use showed a dose-response trend (p for trend = 0.009).",
+      "authors": ["Kamel Freya", "Tanner Caroline M", "Umbach David M", "Hoppin Jane A", "Alavanja Michael C R"],
+      "journal": "American Journal of Epidemiology",
+      "pub_date": "2007 Feb",
+      "year": 2007,
+      "mesh_terms": ["Parkinson Disease", "Pesticides", "Agricultural Workers' Diseases", "Cohort Studies"],
+      "doi": "10.1093/aje/kwk024"
+    },
+    {
+      "pmid": "23713084",
+      "title": "Exposure to pesticides or solvents and risk of Parkinson disease.",
+      "abstract": "Meta-analysis of 104 studies (1985-2011) examined associations between PD and environmental/occupational exposures. Pooled RR for any pesticide exposure was 1.62 (95% CI 1.40-1.88). Paraquat (RR 2.00, 95% CI 1.50-2.66) and rotenone (RR 2.20, 95% CI 1.46-3.31) showed the strongest associations among individually-evaluated compounds.",
+      "authors": ["Pezzoli Gianni", "Cereda Emanuele"],
+      "journal": "Neurology",
+      "pub_date": "2013 May",
+      "year": 2013,
+      "mesh_terms": ["Parkinson Disease", "Pesticides", "Solvents", "Meta-Analysis", "Risk Factors"],
+      "doi": "10.1212/WNL.0b013e318294b3c8"
+    },
+    {
+      "pmid": "22627180",
+      "title": "Pesticide exposure and Parkinson's disease: epidemiological evidence of association.",
+      "abstract": "Systematic review of 46 case-control and 7 cohort studies from 1985-2011. A positive association between PD and pesticide exposure was found in 38 of 46 case-control studies. Paraquat, maneb, and dieldrin showed the most consistent associations. The authors note heterogeneity in exposure assessment is a major limitation.",
+      "authors": ["Freire Carmen", "Koifman Sergio"],
+      "journal": "Neurotoxicology",
+      "pub_date": "2012 Oct",
+      "year": 2012,
+      "mesh_terms": ["Parkinson Disease", "Pesticides", "Paraquat", "Maneb", "Systematic Review"],
+      "doi": "10.1016/j.neuro.2012.05.011"
+    },
+    {
+      "pmid": "16802290",
+      "title": "Pesticide exposure and risk for Parkinson's disease.",
+      "abstract": "In the Cancer Prevention Study II Nutrition Cohort (n=143,325), exposure to pesticides was associated with a 70% higher incidence of PD (RR 1.7, 95% CI 1.2-2.3) after 10 years of follow-up. No association was found with other common chemical exposures (asbestos, solvents, acids).",
+      "authors": ["Ascherio Alberto", "Chen Honglei", "Weisskopf Marc G", "O'Reilly Eilis", "McCullough Marjorie L"],
+      "journal": "Annals of Neurology",
+      "pub_date": "2006 Aug",
+      "year": 2006,
+      "mesh_terms": ["Parkinson Disease", "Pesticides", "Environmental Exposure", "Cohort Studies"],
+      "doi": "10.1002/ana.20904"
+    },
+    {
+      "pmid": "21505849",
+      "title": "Parkinson's disease risk from ambient exposure to pesticides.",
+      "abstract": "Residential proximity to agricultural pesticide applications was assessed using California Pesticide Use Reports for 362 cases and 341 controls. Ambient exposure to ziram, maneb, and paraquat within 500m of residence was associated with PD (OR 3.09, 95% CI 1.69-5.64 for exposure to all three).",
+      "authors": ["Wang Angelika", "Costello Sadie", "Cockburn Myles", "Zhang Xinbo", "Bronstein Jeff"],
+      "journal": "European Journal of Epidemiology",
+      "pub_date": "2011 Jul",
+      "year": 2011,
+      "mesh_terms": ["Parkinson Disease", "Paraquat", "Ziram", "Maneb", "Environmental Exposure"],
+      "doi": "10.1007/s10654-011-9574-5"
+    },
+    {
+      "pmid": "21749963",
+      "title": "Paraquat, maneb, and risk of Parkinson disease in the Central Valley of California.",
+      "abstract": "Case-control study of 368 PD cases and 341 controls. Residential exposure to paraquat alone (OR 1.36, 95% CI 0.89-2.09) was weaker than combined paraquat+maneb exposure. The investigators suggest synergistic mechanisms may underlie the combined effect.",
+      "authors": ["Costello Sadie", "Cockburn Myles", "Ritz Beate"],
+      "journal": "American Journal of Epidemiology",
+      "pub_date": "2009",
+      "year": 2009,
+      "mesh_terms": ["Parkinson Disease", "Paraquat", "Maneb", "Synergism"],
+      "doi": null
+    },
+    {
+      "pmid": "23076008",
+      "title": "Genetic and environmental risk factors for Parkinson's disease: ALDH2 variants and paraquat exposure.",
+      "abstract": "Gene-environment interaction study. PD risk was higher among paraquat-exposed individuals carrying variant ALDH2 alleles (OR 4.00, 95% CI 1.17-13.7) vs. unexposed wild-type (reference). Supports a mitochondrial/oxidative-stress mechanism.",
+      "authors": ["Fitzmaurice Arthur G", "Rhodes Shannon L", "Cockburn Myles", "Ritz Beate", "Bronstein Jeff M"],
+      "journal": "Neurology",
+      "pub_date": "2014 Feb",
+      "year": 2014,
+      "mesh_terms": ["Parkinson Disease", "Paraquat", "Aldehyde Dehydrogenase", "Gene-Environment Interaction"],
+      "doi": "10.1212/WNL.0000000000000108"
+    },
+    {
+      "pmid": "11080509",
+      "title": "Chronic systemic pesticide exposure reproduces features of Parkinson's disease.",
+      "abstract": "Chronic, low-dose rotenone infusion in rats produced selective nigrostriatal dopaminergic degeneration, behavioral symptoms of PD, and Lewy-body-like cytoplasmic inclusions containing alpha-synuclein and ubiquitin. Provides a mechanistic basis for environmental pesticide involvement in PD.",
+      "authors": ["Betarbet Ranjita", "Sherer Todd B", "MacKenzie Gillian", "Garcia-Osuna Monica", "Panov Alexander V"],
+      "journal": "Nature Neuroscience",
+      "pub_date": "2000 Dec",
+      "year": 2000,
+      "mesh_terms": ["Parkinson Disease", "Rotenone", "alpha-Synuclein", "Animal Models", "Dopaminergic Neurons"],
+      "doi": "10.1038/81834"
+    },
+    {
+      "pmid": "22972101",
+      "title": "Functional variation in the dopamine transporter gene and paraquat risk for Parkinson's disease.",
+      "abstract": "Among 324 PD cases and 334 controls in Central California, paraquat-exposed individuals carrying at-risk DAT variants had a 3.5-fold (95% CI 1.42-8.69) higher PD risk than unexposed referent genotypes. Supports a specific DAT-mediated uptake pathway.",
+      "authors": ["Ritz Beate R", "Manthripragada Angelika D", "Costello Sadie", "Lincoln Sarah J", "Farrer Matthew J"],
+      "journal": "Environmental Health Perspectives",
+      "pub_date": "2009 Jun",
+      "year": 2009,
+      "mesh_terms": ["Parkinson Disease", "Paraquat", "Dopamine Plasma Membrane Transport Proteins", "Gene-Environment Interaction"],
+      "doi": null
+    },
+    {
+      "pmid": "29902242",
+      "title": "Re-evaluation of the causal relationship between paraquat and Parkinson's disease.",
+      "abstract": "Critical review commissioned by a regulatory review panel. Concludes that while epidemiological and mechanistic data are consistent with a causal relationship, exposure misclassification, recall bias in case-control studies, and inconsistent dose-response quantification preclude definitive causal inference. Calls for improved exposure biomarkers.",
+      "authors": ["Weed Douglas L"],
+      "journal": "Critical Reviews in Toxicology",
+      "pub_date": "2018 Jul",
+      "year": 2018,
+      "mesh_terms": ["Parkinson Disease", "Paraquat", "Causality", "Review"],
+      "doi": "10.1080/10408444.2018.1453829"
+    }
+  ],
+  "synthesis": {
+    "supporting_count": 10,
+    "contradicting_count": 2,
+    "evidence_weight": "Moderate",
+    "key_findings": [
+      "Tanner et al. (2011): Paraquat use associated with PD (OR 2.5, 95% CI 1.4-4.7) in the FAME case-control study.",
+      "Pezzoli & Cereda (2013): Meta-analysis of 104 studies found pooled RR 2.00 (95% CI 1.50-2.66) for paraquat-PD association.",
+      "Costello et al. (2009): Combined residential paraquat+maneb exposure associated with PD (OR 1.75, 95% CI 1.13-2.73); paraquat alone weaker (OR 1.36, 95% CI 0.89-2.09).",
+      "Wang et al. (2011): Ambient ziram+maneb+paraquat exposure within 500m of residence associated with PD (OR 3.09, 95% CI 1.69-5.64).",
+      "Kamel et al. (2007): Agricultural Health Study cohort showed dose-response with cumulative pesticide use-days (p for trend = 0.009).",
+      "Betarbet et al. (2000): Chronic low-dose rotenone in rats reproduced selective nigrostriatal degeneration and Lewy-body-like alpha-synuclein inclusions — mechanistic plausibility for complex I inhibitors."
+    ],
+    "contradictions": [
+      "Costello et al. (2009) found paraquat-alone OR only 1.36 (not statistically significant) while combined paraquat+maneb OR was 1.75 — suggests effect may be specific to co-exposure rather than paraquat alone.",
+      "Weed (2018) review concluded epidemiological evidence is consistent with causation but not definitive, citing exposure misclassification and recall bias in case-control designs.",
+      "Studies disagree on the relevant exposure window — some find strongest effect during ages 19-40 (Costello 2009), others cumulative lifetime exposure (Kamel 2007)."
+    ],
+    "dose_response_evidence": "Moderate dose-response evidence: Kamel et al. (2007) reported a significant trend across cumulative pesticide-use days (p=0.009). Gene-environment interaction studies (Fitzmaurice 2014, Ritz 2009) show higher risk in genetically susceptible subgroups, consistent with a biological gradient modulated by individual metabolism. However, most studies used ever/never exposure rather than quantified dose, so gradient analyses are limited.",
+    "evidence_gaps": [
+      "Exposure misclassification: most studies rely on self-report or residential proximity; quantitative biomarkers (urinary paraquat metabolites) are rarely available at scale.",
+      "Latency between exposure and PD onset is long (decades), making cohort studies expensive; most evidence is from case-control designs vulnerable to recall bias.",
+      "Individual-level confounding by co-exposures to maneb, rotenone, and organophosphates is difficult to disentangle.",
+      "Ecological-level analyses (county pesticide use vs. PD mortality) have not been comprehensively published and may be confounded by healthcare access and diagnostic patterns.",
+      "Mechanistic evidence is largely from rodent models of rotenone (complex I inhibition); paraquat's mechanism (redox cycling, superoxide generation) is plausible but less directly paralleled in human neuropathology."
+    ],
+    "suggested_queries": [
+      "(paraquat[MeSH] OR \"paraquat dichloride\") AND Parkinson disease/mortality[MeSH] AND (county OR ecological)",
+      "paraquat AND Parkinson AND biomarker AND (urinary OR blood)",
+      "paraquat AND Parkinson AND cohort AND dose-response",
+      "alpha-synuclein AND (paraquat OR rotenone) AND (mechanism OR pathology)"
+    ],
+    "confidence": "Moderate"
+  },
+  "queries_used": [
+    "(paraquat[MeSH] OR \"paraquat dichloride\") AND \"Parkinson Disease\"[MeSH]",
+    "pesticide[MeSH] AND \"Parkinson Disease\"[MeSH] AND (cohort OR case-control)",
+    "(rotenone OR paraquat) AND Parkinson AND mechanism",
+    "paraquat AND Parkinson AND (gene-environment OR polymorphism)"
+  ]
+}

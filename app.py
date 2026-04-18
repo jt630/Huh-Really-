@@ -7,9 +7,8 @@ st.set_page_config(page_title="Unlikely Correlations", page_icon="🔬", layout=
 if not os.environ.get("ANTHROPIC_API_KEY"):
     from dotenv import load_dotenv
     load_dotenv()
-if not os.environ.get("ANTHROPIC_API_KEY"):
-    st.error("**ANTHROPIC_API_KEY not set.** Create a `.env` file with `ANTHROPIC_API_KEY=your_key` then restart.")
-    st.stop()
+
+has_api_key = bool(os.environ.get("ANTHROPIC_API_KEY"))
 
 # Sidebar
 with st.sidebar:
@@ -34,6 +33,12 @@ with st.sidebar:
     run_btn = col1.button("▶ Run", type="primary")
     demo_btn = col2.button("Demo")
 
+    st.divider()
+    if has_api_key:
+        st.caption("Live mode ready — ANTHROPIC_API_KEY detected.")
+    else:
+        st.caption("Demo mode only — no ANTHROPIC_API_KEY set. Click **Demo** to run the bundled case against pre-computed agent outputs.")
+
 # Main area
 st.title("Unlikely Correlations")
 st.caption("Multi-agent research platform for detecting hidden health-environment associations.")
@@ -45,11 +50,21 @@ if demo_btn:
         case = yaml.safe_load(case_path.read_text())
         st.session_state["demo_case"] = case
         st.session_state["demo_fixture"] = case.get("fixture_data")
+        st.session_state["demo_outputs"] = case.get("fixture_outputs")
         st.session_state["run"] = True
         st.rerun()
 
 should_run = run_btn or st.session_state.pop("run", False)
 if should_run:
+    if run_btn and not has_api_key:
+        st.error(
+            "**ANTHROPIC_API_KEY not set.** Live runs call the Claude API. "
+            "Either create a `.env` with `ANTHROPIC_API_KEY=…` and restart, "
+            "or click **Demo** to run the bundled case offline using pre-computed "
+            "agent outputs."
+        )
+        st.stop()
+
     from src.pipeline import Pipeline
 
     progress = st.progress(0, text="Starting pipeline...")
@@ -62,6 +77,7 @@ if should_run:
         progress.progress(pct, text=f"{stage}: {status}")
 
     fixture_path = st.session_state.pop("demo_fixture", None)
+    fixture_outputs = st.session_state.pop("demo_outputs", None)
 
     with st.spinner("Running pipeline..."):
         pipeline = Pipeline()
@@ -70,7 +86,9 @@ if should_run:
                 result = pipeline.run_hypothesis(
                     exposure=exposure, outcome=outcome,
                     confounders=confounders, output_mode=output_mode,
-                    progress_cb=update_progress, fixture_path=fixture_path)
+                    progress_cb=update_progress,
+                    fixture_path=fixture_path,
+                    fixture_outputs=fixture_outputs)
                 results = [result]
             else:
                 results = pipeline.run_discovery(
@@ -84,9 +102,18 @@ if should_run:
     progress.progress(100, text="Complete!")
 
     if results:
-        tabs = st.tabs(["Overview", "Correlation", "Literature", "Causation", "Study Design", "Raw Data"])
+        result = results[0]
 
-        result = results[0]  # primary result
+        if getattr(result, "demo_mode", False):
+            st.success(
+                "**Demo Mode** — agent outputs loaded from pre-computed fixtures "
+                "(`cases/parkinsons_golf_outputs/`). Correlation stats are computed "
+                "live from the CSV fixture; literature, causation, and study-design "
+                "stages would call the Claude API in production. See README → "
+                "*Demo Mode vs. Live Mode*."
+            )
+
+        tabs = st.tabs(["Overview", "Correlation", "Literature", "Causation", "Study Design", "Raw Data"])
 
         with tabs[0]:
             st.subheader("Summary")
@@ -160,10 +187,10 @@ else:
         """
         **Pipeline stages**
 
-        1. **Correlation** — Pearson/Spearman + partial correlation, optional PySAL LISA spatial clustering.
-        2. **Literature** — PubMed search + Claude synthesis of supporting / contradicting evidence.
-        3. **Causation** — Bradford Hill criteria, confounder review, alternative explanations.
-        4. **Study design** — Investigation brief or full research proposal (downloadable Markdown).
+        1. **Correlation** — Pearson/Spearman + partial correlation, optional PySAL LISA spatial clustering. *Runs locally, no API.*
+        2. **Literature** — PubMed search + Claude synthesis of supporting / contradicting evidence. *API in live mode; fixture in demo mode.*
+        3. **Causation** — Bradford Hill criteria, confounder review, alternative explanations. *API in live mode; fixture in demo mode.*
+        4. **Study design** — Investigation brief or full research proposal (downloadable Markdown). *API in live mode; fixture in demo mode.*
 
         County-level analysis across the US (2015–2019 for the demo case).
         """

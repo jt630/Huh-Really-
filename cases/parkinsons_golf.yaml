@@ -42,3 +42,9 @@ analysis:
 
 # Pre-built fixture for demo/offline use (synthetic data, realistic distributions)
 fixture_data: cases/parkinsons_golf_fixture.csv
+
+# Pre-computed agent outputs for demo/offline use (no Anthropic API calls).
+# Contains literature.json, causation.json, study_design.json. When present,
+# the pipeline loads these instead of calling the live Claude API. See README
+# "Demo Mode vs. Live Mode" for details.
+fixture_outputs: cases/parkinsons_golf_outputs

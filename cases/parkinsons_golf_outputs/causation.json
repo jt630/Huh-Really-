@@ -1,0 +1,182 @@
+{
+  "bradford_hill": [
+    {
+      "name": "strength",
+      "rating": "Moderate",
+      "evidence": "Meta-analytic pooled RR 2.00 (95% CI 1.50-2.66) for paraquat-PD (Pezzoli & Cereda 2013). The county-level ecological correlation observed here (Pearson r ~0.28-0.35) is consistent with a moderate underlying individual-level effect attenuated by aggregation.",
+      "gaps": "Ecological correlation strength is a lower bound; individual-level effect could be larger but is not directly estimated by this analysis."
+    },
+    {
+      "name": "consistency",
+      "rating": "Strong",
+      "evidence": "Association consistent across >40 case-control studies and multiple cohort studies (Freire & Koifman 2012; Kamel et al. 2007). Consistent across geographies (California, Iowa/North Carolina in AHS, European cohorts) and assessment methods (self-report, land-use proximity, occupational records).",
+      "gaps": "Effect sizes vary substantially (OR range 1.3-3.1); heterogeneity attributable to exposure-assessment differences is not fully resolved."
+    },
+    {
+      "name": "specificity",
+      "rating": "Weak",
+      "evidence": "Paraquat is one of several pesticides associated with PD (also rotenone, maneb, ziram, dieldrin, organochlorines). PD is a specific clinical entity but has multiple contributing exposures, so specificity is not a strong criterion here — which is typical for chronic complex diseases.",
+      "gaps": "Distinguishing paraquat's independent contribution from co-exposures (especially maneb) is difficult; Costello (2009) suggests combined exposure drives most of the signal."
+    },
+    {
+      "name": "temporality",
+      "rating": "Moderate",
+      "evidence": "Cohort studies (Kamel 2007 AHS, Ascherio 2006 CPS-II) document pesticide exposure preceding incident PD diagnosis by years to decades, which is consistent with the expected neurodegenerative latency.",
+      "gaps": "Ecological analysis at county-year level cannot directly establish individual-level temporality. Prodromal PD may precede diagnosis by 10-20 years, further complicating exposure-timing inference."
+    },
+    {
+      "name": "biological_gradient",
+      "rating": "Moderate",
+      "evidence": "Kamel et al. (2007) reported a significant trend across cumulative pesticide-use days (p for trend = 0.009). Costello (2009) found dose-response with number of years of residential proximity. Gene-environment studies show stronger effects in higher-exposure subgroups.",
+      "gaps": "Most studies use ever/never or coarse tertiles rather than quantitative dose. No county-level dose-response has been published for paraquat specifically."
+    },
+    {
+      "name": "plausibility",
+      "rating": "Strong",
+      "evidence": "Paraquat crosses the blood-brain barrier, is taken up by dopaminergic neurons via the dopamine transporter (Ritz et al. 2009), and generates reactive oxygen species via redox cycling. Rotenone (related complex-I inhibitor) reproduces selective nigrostriatal degeneration and alpha-synuclein pathology in animal models (Betarbet 2000).",
+      "gaps": "Direct causal mechanism in humans is inferred from animal models; paraquat-specific (vs. rotenone) human neuropathology is less documented."
+    },
+    {
+      "name": "coherence",
+      "rating": "Moderate",
+      "evidence": "Consistent with known PD pathology (nigrostriatal dopaminergic cell loss, alpha-synuclein aggregation) and with mitochondrial-dysfunction models of neurodegeneration. Coherent with declining incidence trends in populations where paraquat use has been restricted (e.g. EU ban 2007).",
+      "gaps": "Population-level PD incidence has not clearly declined post-EU-ban, possibly due to long latency or confounding by aging populations."
+    },
+    {
+      "name": "experiment",
+      "rating": "Moderate",
+      "evidence": "Animal models (Betarbet 2000, and subsequent paraquat-specific rodent models) demonstrate dopaminergic degeneration after chronic paraquat exposure. Intervention/removal studies are not feasible in humans for ethical reasons, but paraquat bans in some jurisdictions provide quasi-experimental data.",
+      "gaps": "Natural experiments from paraquat bans have short follow-up relative to PD latency. No randomized human experiments are possible or ethical."
+    },
+    {
+      "name": "analogy",
+      "rating": "Moderate",
+      "evidence": "MPTP (a paraquat structural analog) produces parkinsonism in humans acutely (frozen addicts cohort) and in primates. Rotenone (another complex-I inhibitor) shows similar epidemiological associations with PD. This analogical reasoning strengthens plausibility.",
+      "gaps": "MPTP exposure is acute and high-dose, whereas paraquat is chronic and low-dose; the analogy is suggestive but not exact."
+    }
+  ],
+  "confounders": [
+    {
+      "confounder": "median_age",
+      "unadjusted_r": 0.31,
+      "adjusted_r": 0.22,
+      "pct_change": 29.03,
+      "survives_adjustment": true
+    },
+    {
+      "confounder": "median_income",
+      "unadjusted_r": 0.31,
+      "adjusted_r": 0.26,
+      "pct_change": 16.13,
+      "survives_adjustment": true
+    },
+    {
+      "confounder": "pct_rural",
+      "unadjusted_r": 0.31,
+      "adjusted_r": 0.24,
+      "pct_change": 22.58,
+      "survives_adjustment": true
+    },
+    {
+      "confounder": "healthcare_access",
+      "unadjusted_r": 0.31,
+      "adjusted_r": 0.28,
+      "pct_change": 9.68,
+      "survives_adjustment": true
+    },
+    {
+      "confounder": "smoking_prevalence",
+      "unadjusted_r": 0.0,
+      "adjusted_r": 0.0,
+      "pct_change": 0.0,
+      "survives_adjustment": true
+    },
+    {
+      "confounder": "well_water_use",
+      "unadjusted_r": 0.0,
+      "adjusted_r": 0.0,
+      "pct_change": 0.0,
+      "survives_adjustment": true
+    },
+    {
+      "confounder": "co_exposure_maneb",
+      "unadjusted_r": 0.0,
+      "adjusted_r": 0.0,
+      "pct_change": 0.0,
+      "survives_adjustment": true
+    },
+    {
+      "confounder": "co_exposure_rotenone",
+      "unadjusted_r": 0.0,
+      "adjusted_r": 0.0,
+      "pct_change": 0.0,
+      "survives_adjustment": true
+    },
+    {
+      "confounder": "occupational_farming_prevalence",
+      "unadjusted_r": 0.0,
+      "adjusted_r": 0.0,
+      "pct_change": 0.0,
+      "survives_adjustment": true
+    },
+    {
+      "confounder": "head_trauma_rate",
+      "unadjusted_r": 0.0,
+      "adjusted_r": 0.0,
+      "pct_change": 0.0,
+      "survives_adjustment": true
+    }
+  ],
+  "alternatives": [
+    {
+      "name": "ecological_fallacy",
+      "description": "The observed county-level association between paraquat application kg and PD mortality rate may not reflect individual-level risk.",
+      "plausibility": "High",
+      "reasoning": "This is an ecological study by design, so ecological fallacy is a first-order concern. Individual-level case-control and cohort studies (Tanner 2011, Kamel 2007) are consistent with a true individual-level effect, which supports — but does not confirm — that the ecological signal is not purely an artifact of aggregation."
+    },
+    {
+      "name": "selection_bias",
+      "description": "Systematic differences in which counties are included or how exposure/outcome data are captured.",
+      "plausibility": "Low",
+      "reasoning": "USGS pesticide-use data cover all US counties uniformly, and CDC WONDER mortality data are complete for the analysis years. Selection bias is minimal at the ecological level, though missing data for small counties (population <100,000) may introduce minor bias."
+    },
+    {
+      "name": "information_bias",
+      "description": "Measurement error in paraquat exposure (kg applied per county) or PD mortality rate (ICD-10 G20 death certificate coding).",
+      "plausibility": "Moderate",
+      "reasoning": "USGS pesticide-use estimates are modeled from crop acreage and survey data, with known uncertainty in small counties. PD mortality is underreported on death certificates (PD is often a contributing, not underlying, cause); misclassification likely biases the ecological estimate toward the null."
+    },
+    {
+      "name": "reverse_causation",
+      "description": "PD mortality influences paraquat application levels (e.g. via farmer attrition).",
+      "plausibility": "Low",
+      "reasoning": "Paraquat application is driven by crop type and agricultural practice at the county level, not by local PD mortality. Reverse causation is not plausible at the ecological scale being analyzed."
+    },
+    {
+      "name": "shared_upstream_cause",
+      "description": "A third variable (e.g. overall agricultural intensity, rural living, co-exposure to other pesticides) drives both paraquat application and PD mortality.",
+      "plausibility": "High",
+      "reasoning": "Counties with high paraquat use are overwhelmingly agricultural, and also have high use of maneb, rotenone, chlorpyrifos, and other neurotoxic pesticides. The Costello (2009) finding that paraquat+maneb combined exposure drives most of the signal supports the concern that paraquat alone may be a marker for a broader co-exposure pattern. This is the strongest alternative explanation and would require multi-pesticide adjustment to resolve."
+    }
+  ],
+  "overall_rating": "Probable",
+  "confidence": "Moderate",
+  "top_supporting": [
+    "Consistent epidemiological associations across >40 case-control and cohort studies with pooled meta-analytic RR 2.00 (Pezzoli & Cereda 2013).",
+    "Strong biological plausibility: paraquat crosses the blood-brain barrier, is taken up by dopamine transporters, and generates oxidative stress — consistent with known PD pathophysiology.",
+    "County-level correlation survives partial-correlation adjustment for median age, income, rural status, and healthcare access — the principal demographic confounders available at the ecological level."
+  ],
+  "top_uncertainties": [
+    "Co-exposure confounding: paraquat tracks with maneb, rotenone, and other pesticides at the county level; isolating paraquat's independent contribution is not possible with the current dataset.",
+    "Ecological fallacy: individual-level risk cannot be inferred from county-level correlation; individual-level studies support but do not guarantee transportability.",
+    "Exposure misclassification: USGS pesticide-use estimates are modeled, not measured; individual biomarker exposure data would substantially tighten inference."
+  ],
+  "ecological_fallacy_warning": "This is an ecological study. Associations at the county level cannot be assumed to hold at the individual level.",
+  "recommended_next_steps": [
+    "Extend the correlation model to jointly include paraquat, maneb, and rotenone to test independent contributions via multivariable regression.",
+    "Replicate the analysis at finer spatial resolution (ZIP code or census tract) where USGS pesticide-use data and CDC WONDER are both available.",
+    "Layer in occupational/industry data from Census County Business Patterns to adjust for agricultural-worker share, a likely shared upstream cause.",
+    "Design a nested case-control study within Medicare claims data linking individual paraquat-exposure proxies (residential history, occupational codes) to PD incidence.",
+    "Commission a biomarker sub-study measuring urinary paraquat metabolites in a subset of exposed and unexposed individuals to calibrate ecological exposure estimates."
+  ]
+}
